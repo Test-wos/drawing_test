@@ -69,7 +69,3 @@ createButton.addEventListener("click", function() {
 
 });
 
-// クリックしたら赤くする
-cell.addEventListener("click", function() {
-    cell.setAttribute("fill", "red");
-});
