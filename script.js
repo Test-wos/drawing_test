@@ -41,10 +41,8 @@ createButton.addEventListener("click", function() {
 
     // 4つの菱形の中心座標
     const centers = [
-        [130, 130],
-        [150, 120],
-        [130, 150],
-        [150, 150]
+        [120, 130],
+        [150, 120]
     ];
 
     centers.forEach(function(point) {
