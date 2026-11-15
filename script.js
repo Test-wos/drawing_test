@@ -32,14 +32,42 @@ for (let k = -300; k <= 600; k += 20) {
     svg.appendChild(line2);
 }
 
-// テスト用のマス
-const cell = document.createElementNS(NS, "polygon");
+// 2×2オブジェクト生成
+const createButton = document.getElementById("create-object");
 
-cell.setAttribute("points", "150,140 160,150 150,160 140,150");
-cell.setAttribute("fill", "white");
-cell.setAttribute("stroke", "none");
+createButton.addEventListener("click", function() {
 
-svg.appendChild(cell);
+    const object = document.createElementNS(NS, "g");
+
+    // 4つの菱形の中心座標
+    const centers = [
+        [140, 140],
+        [160, 140],
+        [140, 160],
+        [160, 160]
+    ];
+
+    centers.forEach(function(point) {
+
+        const x = point[0];
+        const y = point[1];
+
+        const cell = document.createElementNS(NS, "polygon");
+
+        cell.setAttribute(
+            "points",
+            `${x},${y-10} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
+        );
+
+        cell.setAttribute("fill", "#4da6ff");
+        cell.setAttribute("stroke", "#333333");
+
+        object.appendChild(cell);
+    });
+
+    svg.appendChild(object);
+
+});
 
 // クリックしたら赤くする
 cell.addEventListener("click", function() {
