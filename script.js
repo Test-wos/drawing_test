@@ -56,7 +56,7 @@ createButton.addEventListener("click", function() {
 
         cell.setAttribute(
             "points",
-            `${x},${y-10} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
+            `${x},${y} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
         );
 
         cell.setAttribute("fill", "#4da6ff");
