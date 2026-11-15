@@ -31,3 +31,17 @@ for (let k = -300; k <= 600; k += 20) {
 
     svg.appendChild(line2);
 }
+
+// テスト用のマス
+const cell = document.createElementNS(NS, "polygon");
+
+cell.setAttribute("points", "150,140 160,150 150,160 140,150");
+cell.setAttribute("fill", "white");
+cell.setAttribute("stroke", "none");
+
+svg.appendChild(cell);
+
+// クリックしたら赤くする
+cell.addEventListener("click", function() {
+    cell.setAttribute("fill", "red");
+});
