@@ -41,10 +41,10 @@ createButton.addEventListener("click", function() {
 
     // 4つの菱形の中心座標
     const centers = [
-        [140, 140],
-        [160, 140],
-        [140, 160],
-        [160, 160]
+        [130, 130],
+        [150, 120],
+        [130, 150],
+        [150, 150]
     ];
 
     centers.forEach(function(point) {
@@ -56,7 +56,7 @@ createButton.addEventListener("click", function() {
 
         cell.setAttribute(
             "points",
-            `${x},${y} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
+            `${x},${y-10} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
         );
 
         cell.setAttribute("fill", "#4da6ff");
