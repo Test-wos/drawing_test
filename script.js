@@ -468,3 +468,14 @@ svg.addEventListener("touchend", e => {
         }
     }
 });
+
+// チーム設定画面を開く
+document.getElementById("team-settings").addEventListener("click", function() {
+    document.getElementById("team-popup").style.display = "block";
+});
+
+// チーム設定画面を閉じる
+document.getElementById("team-close").addEventListener("click", function() {
+    document.getElementById("team-popup").style.display = "none";
+});
+
