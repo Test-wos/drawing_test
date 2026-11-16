@@ -185,17 +185,21 @@ svg.addEventListener("pointermove", function(event) {
 });
 
 
+
 // ドラッグ終了・方眼補正
 svg.addEventListener("pointerup", function(event) {
 
     if (!drag) return;
-    if (drag.type == "pan"){
+
+    if (drag.type == "pan") {
         drag = null;
         return;
     }
 
-    let x = drag.obj.x;
-    let y = drag.obj.y;
+    const current = drag;
+
+    let x = current.obj.x;
+    let y = current.obj.y;
 
     // 方眼の2方向の座標
     let u = x + y;
@@ -205,12 +209,25 @@ svg.addEventListener("pointerup", function(event) {
     u = Math.round(u / 20) * 20;
     v = Math.round(v / 20) * 20;
 
-    drag.obj.x = (u + v) / 2;
-    drag.obj.y = (u - v) / 2;
+    x = (u + v) / 2;
+    y = (u - v) / 2;
 
-    drag.group.setAttribute(
+    // 侵入不可エリアとの重なり判定
+    const dx = Math.abs(x - 500);
+    const dy = Math.abs(y - 500);
+
+    if (dx + dy <= 140) {
+        // 重なっていたら元の位置へ戻す
+        x = current.startX;
+        y = current.startY;
+    }
+
+    current.obj.x = x;
+    current.obj.y = y;
+
+    current.group.setAttribute(
         "transform",
-        `translate(${drag.obj.x},${drag.obj.y})`
+        `translate(${x},${y})`
     );
 
     drag = null;
