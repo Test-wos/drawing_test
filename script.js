@@ -270,5 +270,13 @@ svg.addEventListener("touchmove", e => {
 }, {passive:false});
 
 svg.addEventListener("touchend", e => {
-    if (e.touches.length < 2) pinch = 0;
+    if (e.touches.length < 2) {
+        pinch = 0;
+
+        // 全体表示に近ければ正確に初期位置へ戻す
+        let v = svg.viewBox.baseVal;
+        if (Math.abs(v.width - 1000) < 1) {
+            svg.setAttribute("viewBox", "0 0 1000 1000");
+        }
+    }
 });
