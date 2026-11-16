@@ -127,7 +127,7 @@ function drawObject(obj) {
     text.textContent = obj.text;
     group.appendChild(text);
 
-    // ドラッグ開始
+        // ドラッグ開始
     group.addEventListener("pointerdown", function(event) {
 
         event.preventDefault();
@@ -139,7 +139,10 @@ function drawObject(obj) {
             group: group,
             startX: obj.x,
             startY: obj.y,
-            startPoint: point
+            startPoint: point,
+            pointerStartX: event.clientX,
+            pointerStartY: event.clientY,
+            moved: false
         };
 
         svg.setPointerCapture(event.pointerId);
@@ -188,6 +191,16 @@ svg.addEventListener("pointermove", function(event) {
             `${x} ${y} ${drag.width} ${drag.height}`);
 
         return;
+    }
+
+        // タップとドラッグを判定
+    const distance = Math.hypot(
+        event.clientX - drag.pointerStartX,
+        event.clientY - drag.pointerStartY
+    );
+
+    if (distance > 5) {
+        drag.moved = true;
     }
 
     const point = getSVGPoint(event);
