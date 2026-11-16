@@ -97,7 +97,7 @@ function openEditPopup(obj) {
 
     document.getElementById("edit-name").value = obj.text;
     document.getElementById("edit-team").value =
-    obj.color === "#ff4d4d" ? "2" : "1";
+    obj.color === "#4dff88" ? "2" : "1";
     document.getElementById("edit-popup").style.display = "block";
 }
 
@@ -116,7 +116,7 @@ document.getElementById("edit-name").addEventListener("input", function() {
 document.getElementById("edit-team").addEventListener("change", function() {
     if (!editingObject) return;
 
-    const color = this.value === "1" ? "#4da6ff" : "#ff4d4d";
+    const color = this.value === "1" ? "#4da6ff" : "#4dff88";
 
     editingObject.color = color;
 
@@ -319,7 +319,7 @@ createButton.addEventListener("click", function() {
         x: 500,
         y: 500,
         text: "A",
-        color: currentTeam === 1 ? "#4da6ff" : "#ff4d4d"
+        color: currentTeam === 1 ? "#4da6ff" : "#4dff88"
     };
 
     objects.push(obj);
@@ -364,7 +364,7 @@ ringButton.addEventListener("click", function() {
             x: 500 + (u + v) / 2,
             y: 500 + (u - v) / 2,
             text: String(nextId),
-            color: currentTeam === 1 ? "#4da6ff" : "#ff4d4d"
+            color: currentTeam === 1 ? "#4da6ff" : "#4dff88"
         };
 
         objects.push(obj);
