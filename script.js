@@ -47,6 +47,7 @@ svg.appendChild(objectsLayer);
 const objects = [];
 let nextId = 1;
 let drag = null;
+let editingObject = null;
 
 // 配置可能か判定
 function canPlace(x, y, ignoreObj = null) {
@@ -88,6 +89,45 @@ function getSVGPoint(event) {
     );
 }
 
+// 編集画面を開く
+function openEditPopup(obj) {
+
+    editingObject = obj;
+
+    document.getElementById("edit-name").value = obj.text;
+    document.getElementById("edit-color").value = obj.color;
+
+    document.getElementById("edit-popup").style.display = "block";
+}
+
+// 名前の即時反映
+document.getElementById("edit-name").addEventListener("input", function() {
+
+    if (!editingObject) return;
+
+    editingObject.text = this.value;
+
+    const group = document.getElementById("object_" + editingObject.id);
+    group.querySelector("text").textContent = this.value;
+});
+
+// 色の即時反映
+document.getElementById("edit-color").addEventListener("input", function() {
+
+    if (!editingObject) return;
+
+    editingObject.color = this.value;
+
+    const group = document.getElementById("object_" + editingObject.id);
+    group.querySelector("polygon").setAttribute("fill", this.value);
+});
+
+// 閉じる
+document.getElementById("edit-close").addEventListener("click", function() {
+
+    document.getElementById("edit-popup").style.display = "none";
+    editingObject = null;
+});
 
 // オブジェクト描画
 function drawObject(obj) {
@@ -230,11 +270,7 @@ svg.addEventListener("pointerup", function(event) {
     
     // タップなら編集画面を開く
     if (!current.moved) {
-        document.getElementById("edit-popup-text").textContent =
-            "オブジェクトID: " + current.obj.id;
-
-        document.getElementById("edit-popup").style.display = "block";
-
+        openEditPopup(current.obj);
         drag = null;
         return;
     }
