@@ -611,3 +611,40 @@ document.getElementById("clear-objects").addEventListener("click", function() {
     objectsLayer.innerHTML = "";
 });
 
+
+ // 座標一覧の生成
+document.getElementById("export-coordinates").addEventListener("click", function() {
+
+    let result = "";
+
+    for (const team of [1, 2]) {
+
+        result += team === 1 ? "【チームA】\n" : "【チームB】\n";
+
+        const teamObjects = objects.filter(obj =>
+            (obj.color === "#4dff88" ? 2 : 1) === team
+        );
+
+        for (const obj of teamObjects) {
+            result += `${obj.text}: (${obj.x}, ${obj.y})\n`;
+        }
+
+        result += "\n";
+    }
+
+    document.getElementById("coordinate-text").value = result;
+    document.getElementById("coordinate-output").style.display = "block";
+});
+
+// コピー
+document.getElementById("copy-coordinates").addEventListener("click", function() {
+    const text = document.getElementById("coordinate-text");
+    text.select();
+    text.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+});
+
+// 閉じる
+document.getElementById("close-coordinates").addEventListener("click", function() {
+    document.getElementById("coordinate-output").style.display = "none";
+});
