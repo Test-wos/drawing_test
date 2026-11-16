@@ -114,37 +114,6 @@ function openEditPopup(obj) {
     document.getElementById("edit-popup").style.display = "block";
 }
 
-// 文字
-const text = document.createElementNS(NS, "text");
-
-text.setAttribute("x", 0);
-text.setAttribute("y", 0);
-text.setAttribute("text-anchor", "middle");
-text.setAttribute("dominant-baseline", "middle");
-text.setAttribute("font-size", 10);
-
-const name = obj.text;
-
-if (name.length <= 4) {
-    text.textContent = name;
-} else {
-    const tspan1 = document.createElementNS(NS, "tspan");
-    const tspan2 = document.createElementNS(NS, "tspan");
-
-    tspan1.setAttribute("x", 0);
-    tspan1.setAttribute("dy", "-0.5em");
-    tspan1.textContent = name.slice(0, Math.ceil(name.length / 2));
-
-    tspan2.setAttribute("x", 0);
-    tspan2.setAttribute("dy", "1em");
-    tspan2.textContent = name.slice(Math.ceil(name.length / 2));
-
-    text.appendChild(tspan1);
-    text.appendChild(tspan2);
-}
-
-group.appendChild(text);
-
 // チームの即時反映
 document.getElementById("edit-team").addEventListener("change", function() {
     if (!editingObject) return;
