@@ -116,19 +116,52 @@ function drawObject(obj) {
     objectsLayer.appendChild(group);
 }
 
+// 空白部分をドラッグして画面移動
+svg.addEventListener("pointerdown", function(event) {
+
+    if (event.target.closest('g[id^="object_"]')) return;
+
+    event.preventDefault();
+
+    const v = svg.viewBox.baseVal;
+
+    drag = {
+        type: "pan",
+        startX: event.clientX,
+        startY: event.clientY,
+        viewX: v.x,
+        viewY: v.y,
+        width: v.width,
+        height: v.height
+    };
+
+    svg.setPointerCapture(event.pointerId);
+});
 
 // ドラッグ中
 svg.addEventListener("pointermove", function(event) {
 
     if (!drag) return;
 
+    if (drag.type === "pan") {
+        const rect = svg.getBoundingClientRect();
+
+        const x = drag.viewX
+            - (event.clientX - drag.startX) * drag.width / rect.width;
+
+        const y = drag.viewY
+            - (event.clientY - drag.startY) * drag.height / rect.height;
+
+        svg.setAttribute("viewBox",
+            `${x} ${y} ${drag.width} ${drag.height}`);
+
+        return;
+    }
+
     const point = getSVGPoint(event);
 
-    drag.obj.x = drag.startX
-        + point.x - drag.startPoint.x;
-
-    drag.obj.y = drag.startY
-        + point.y - drag.startPoint.y;
+    drag.obj.x = drag.startX + point.x - drag.startPoint.x;
+    drag.obj.y = drag.startY + point.y - drag.startPoint.y;
 
     drag.group.setAttribute(
         "transform",
@@ -141,6 +174,10 @@ svg.addEventListener("pointermove", function(event) {
 svg.addEventListener("pointerup", function(event) {
 
     if (!drag) return;
+    if (drag.type == "pan"){
+        drag = null;
+        return;
+    }
 
     let x = drag.obj.x;
     let y = drag.obj.y;
