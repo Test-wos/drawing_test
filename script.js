@@ -493,7 +493,7 @@ document.getElementById("select-team-2").addEventListener("click", function() {
 
 // 全オブジェクトを消去
 document.getElementById("clear-objects").addEventListener("click", function() {
-    objects = [];
+    objects.length=0;
     objectsLayer.innerHTML = "";
 });
 
