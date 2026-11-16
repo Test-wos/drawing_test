@@ -301,6 +301,11 @@ ringButton.addEventListener("click", function() {
 
     // オブジェクト生成
     positions.forEach(([u, v]) => {
+        
+        const x = 500 + (u+v)/2;
+        const y = 500 + (u-v)/2;
+        
+        if(!canPlace(x,y)) return;
 
         const obj = {
             id: nextId,
@@ -313,8 +318,6 @@ ringButton.addEventListener("click", function() {
 
         objects.push(obj);
         nextId++;
-        
-        if(!canPlace(x,y)) return;
 
         drawObject(obj);
     });
