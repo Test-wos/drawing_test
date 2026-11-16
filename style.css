@@ -1,12 +1,7 @@
 #drawing-area {
-    width: 90vw;
-    max-width: 600px;
-    aspect-ratio: 1/1;
-    
+    width: 1000px;
+    height: 1000px;
     border: 2px solid black;
-    margin: 20px auto;
-    display: block;
     background-color: white;
-    
     touch-action: none;
 }
