@@ -100,31 +100,20 @@ function drawObject(obj) {
         `translate(${obj.x},${obj.y})`
     );
 
-    // 4つの菱形
-    const offsets = [
-        [0, -10],
-        [10, 0],
-        [-10, 0],
-        [0, 10]
-    ];
+    // 外周だけを描画
+    const shape = document.createElementNS(NS, "polygon");
 
-    offsets.forEach(function(point) {
+    shape.setAttribute(
+        "points",
+        "0,-20 20,0 0,20 -20,0"
+    );
 
-        const x = point[0];
-        const y = point[1];
+    shape.setAttribute("fill", obj.color);
+    shape.setAttribute("stroke", "#333333");
+    shape.setAttribute("stroke-width", "1");
+    shape.setAttribute("fill-opacity", "1");
 
-        const cell = document.createElementNS(NS, "polygon");
-
-        cell.setAttribute(
-            "points",
-            `${x},${y-10} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
-        );
-
-        cell.setAttribute("fill", obj.color);
-        cell.setAttribute("stroke", "#333333");
-        cell.setAttribute("fill-opacity", "1");
-        group.appendChild(cell);
-    });
+    group.appendChild(shape);
 
     // 文字
     const text = document.createElementNS(NS, "text");
