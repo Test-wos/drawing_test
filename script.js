@@ -24,32 +24,33 @@ for (let k = -2000; k <= 4000; k += 20) {
     svg.appendChild(line2);
 }
 
-// 侵入不可エリア
+// 色付きエリア（外側）
+const RedZone = document.createElementNS(NS, "polygon");
+
+RedZone.setAttribute(
+    "points",
+    "500,300 700,500 500,700 300,500"
+);
+RedZone.setAttribute("fill", "#ff9999");
+RedZone.setAttribute("fill-opacity", "0.3");
+RedZone.setAttribute("stroke", "red");
+RedZone.setAttribute("stroke-width", "2");
+
+svg.appendChild(RedZone);
+
+// 侵入不可エリア（内側）
 const restricted = document.createElementNS(NS, "polygon");
 
 restricted.setAttribute(
     "points",
     "500,380 620,500 500,620 380,500"
 );
-
 restricted.setAttribute("fill", "#ff9999");
 restricted.setAttribute("fill-opacity", "0.3");
 restricted.setAttribute("stroke", "red");
 restricted.setAttribute("stroke-width", "2");
 
 svg.appendChild(restricted);
-
-// 色付きエリア
-const RedZone=document.createElementNS(NS,"polygon");
-RedZone.setAttribute(
-    "points",
-    500,300 700,500 500,700 300,500"
-);
-RedZone.setAttribute("fill","#ff999");
-RedZone.setAttribute("fill-opacity","0.3")
-RedZone.setAttribute("stroke","red");
-RedZone.setAttribute("stroke-width","2");
-svg.appendChild(RedZone);
 
 // オブジェクト専用レイヤー
 const objectsLayer = document.createElementNS(NS, "g");
