@@ -24,6 +24,21 @@ for (let k = -1000; k <= 2000; k += 20) {
     svg.appendChild(line2);
 }
 
+// 侵入不可エリア
+const restricted = document.createElementNS(NS, "polygon");
+
+restricted.setAttribute(
+    "points",
+    "500,380 620,500 500,620 380,500"
+);
+
+restricted.setAttribute("fill", "#ff9999");
+restricted.setAttribute("fill-opacity", "0.3");
+restricted.setAttribute("stroke", "red");
+restricted.setAttribute("stroke-width", "2");
+
+svg.appendChild(restricted);
+
 // オブジェクト専用レイヤー
 const objectsLayer = document.createElementNS(NS, "g");
 svg.appendChild(objectsLayer);
