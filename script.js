@@ -122,7 +122,7 @@ function drawObject(obj) {
 
         cell.setAttribute("fill", obj.color);
         cell.setAttribute("stroke", "#333333");
-
+        cell.setAttribute("fill-opacity", "1");
         group.appendChild(cell);
     });
 
