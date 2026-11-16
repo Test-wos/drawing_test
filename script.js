@@ -48,6 +48,7 @@ const objects = [];
 let nextId = 1;
 let drag = null;
 let editingObject = null;
+let currentTeam = 1;
 
 // 配置可能か判定
 function canPlace(x, y, ignoreObj = null) {
@@ -479,3 +480,13 @@ document.getElementById("team-close").addEventListener("click", function() {
     document.getElementById("team-popup").style.display = "none";
 });
 
+// チーム選択
+document.getElementById("select-team-1").addEventListener("click", function() {
+    currentTeam = 1;
+    document.getElementById("team-popup").style.display = "none";
+});
+
+document.getElementById("select-team-2").addEventListener("click", function() {
+    currentTeam = 2;
+    document.getElementById("team-popup").style.display = "none";
+});
