@@ -131,7 +131,7 @@ document.getElementById("edit-name").addEventListener("input", function() {
     text.setAttribute("y", 0);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("dominant-baseline", "middle");
-    text.setAttribute("font-size", 10);
+    text.setAttribute("font-size", 6);
 
     const name = this.value;
 
