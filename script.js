@@ -621,9 +621,35 @@ document.getElementById("export-coordinates").addEventListener("click", function
 
         result += team === 1 ? "【チームA】\n" : "【チームB】\n";
 
-        const teamObjects = objects.filter(obj =>
-            (obj.color === "#4dff88" ? 2 : 1) === team
-        );
+        
+const teamObjects = objects
+    .filter(obj =>
+        (obj.color === "#4dff88" ? 2 : 1) === team
+    )
+    .sort((a, b) => {
+
+        // 方眼座標に変換
+        const ua = a.x + a.y - 1000;
+        const va = a.x - a.y;
+        const ub = b.x + b.y - 1000;
+        const vb = b.x - b.y;
+
+        // 周回番号（1周目、2周目…）
+        const ra = Math.max(Math.abs(ua), Math.abs(va));
+        const rb = Math.max(Math.abs(ub), Math.abs(vb));
+
+        if (ra !== rb) return ra - rb;
+
+        // 時計回り：上→右→下→左
+        const angleA = Math.atan2(a.x - 500, 500 - a.y);
+        const angleB = Math.atan2(b.x - 500, 500 - b.y);
+
+        const aa = (angleA + Math.PI * 2) % (Math.PI * 2);
+        const ab = (angleB + Math.PI * 2) % (Math.PI * 2);
+
+        return aa - ab;
+    });
+
 
         for (const obj of teamObjects) {
             result += `${obj.text}: (${obj.x}, ${obj.y})\n`;
