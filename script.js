@@ -520,6 +520,12 @@ generateImageButton.addEventListener("click", function() {
         canvas.height = 1000;
 
         const ctx = canvas.getContext("2d");
+
+        // 白背景
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // SVGを描画
         ctx.drawImage(img, 0, 0);
 
         // PNGに変換して表示
