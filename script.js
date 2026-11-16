@@ -318,7 +318,7 @@ createButton.addEventListener("click", function() {
         x: 500,
         y: 500,
         text: "A",
-        color: "#4da6ff"
+        color: currentTeam === 1 ? "#4da6ff" : "#ff4d4d"
     };
 
     objects.push(obj);
@@ -363,7 +363,7 @@ ringButton.addEventListener("click", function() {
             x: 500 + (u + v) / 2,
             y: 500 + (u - v) / 2,
             text: String(nextId),
-            color: "#4da6ff"
+            color: currentTeam === 1 ? "#4da6ff" : "#ff4d4d"
         };
 
         objects.push(obj);
