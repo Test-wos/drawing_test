@@ -24,6 +24,166 @@ for (let k = -300; k <= 600; k += 20) {
 }
 
 
+// オブジェクト専用レイヤー
+const objectsLayer = document.createElementNS(NS, "g");
+svg.appendChild(objectsLayer);
+
+// オブジェクトを描画する関数
+function drawObject(obj) {
+
+    const group = document.createElementNS(NS, "g");
+
+    group.setAttribute("id", "object_" + obj.id);
+    group.setAttribute("transform", `translate(${obj.x},${obj.y})`);
+
+    // 4つのセルの中心位置
+    const offsets = [
+        [0, -10],
+        [10, 0],
+        [-10, 0],
+        [0, 10]
+    ];
+
+    offsets.forEach(function(point) {
+
+        const x = point[0];
+        const y = point[1];
+
+        const cell = document.createElementNS(NS, "polygon");
+
+        cell.setAttribute(
+            "points",
+            `${x},${y-10} ${x+10},${y} ${x},${y+10} ${x-10},${y}`
+        );
+
+        cell.setAttribute("fill", obj.color);
+        cell.setAttribute("stroke", "#333333");
+
+        group.appendChild(cell);
+    });
+
+    // 文字
+    const text = document.createElementNS(NS, "text");
+
+    text.setAttribute("x", 0);
+    text.setAttribute("y", 0);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("dominant-baseline", "middle");
+    text.setAttribute("font-size", 12);
+
+    text.textContent = obj.text;
+
+    group.appendChild(text);
+
+    // ドラッグ開始
+    group.addEventListener("pointerdown", function(event) {
+
+        event.preventDefault();
+
+        const point = getSVGPoint(event);
+
+        drag = {
+            obj: obj,
+            group: group,
+            startX: obj.x,
+            startY: obj.y,
+            startPoint: point
+        };
+
+        svg.setPointerCapture(event.pointerId);
+    });
+
+    objectsLayer.appendChild(group);
+}
+
+
+// マウス・タッチ位置をSVG座標に変換
+function getSVGPoint(event) {
+
+    const point = svg.createSVGPoint();
+
+    point.x = event.clientX;
+    point.y = event.clientY;
+
+    return point.matrixTransform(
+        svg.getScreenCTM().inverse()
+    );
+}
+
+
+// ドラッグ状態
+let drag = null;
+
+
+// ドラッグ中
+svg.addEventListener("pointermove", function(event) {
+
+    if (!drag) return;
+
+    const point = getSVGPoint(event);
+
+    drag.obj.x = drag.startX
+        + point.x - drag.startPoint.x;
+
+    drag.obj.y = drag.startY
+        + point.y - drag.startPoint.y;
+
+    drag.group.setAttribute(
+        "transform",
+        `translate(${drag.obj.x},${drag.obj.y})`
+    );
+});
+
+
+// ドラッグ終了・方眼補正
+svg.addEventListener("pointerup", function(event) {
+
+    if (!drag) return;
+
+    let x = drag.obj.x;
+    let y = drag.obj.y;
+
+    // 方眼の2方向の座標
+    let u = x + y;
+    let v = x - y;
+
+    // 20間隔の方眼交点へ補正
+    u = Math.round(u / 20) * 20;
+    v = Math.round(v / 20) * 20;
+
+    // SVG直交座標へ戻す
+    drag.obj.x = (u + v) / 2;
+    drag.obj.y = (u - v) / 2;
+
+    drag.group.setAttribute(
+        "transform",
+        `translate(${drag.obj.x},${drag.obj.y})`
+    );
+
+    drag = null;
+});
+
+
+// 生成ボタン
+const createButton = document.getElementById("create-object");
+
+createButton.addEventListener("click", function() {
+
+    const obj = {
+        id: nextId,
+        type: "2x2",
+        x: 150,
+        y: 150,
+        text: "A",
+        color: "#4da6ff"
+    };
+
+    objects.push(obj);
+    nextId++;
+
+    drawObject(obj);
+});
+
 // オブジェクト管理用データ
 const objects = [];
 let nextId = 1;
