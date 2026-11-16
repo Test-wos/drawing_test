@@ -263,13 +263,8 @@ svg.addEventListener("touchmove", e => {
     let s = pinch / getDistance(e.touches[0], e.touches[1]);
     let w = Math.max(100, Math.min(1000, vb.w*s));
     let h = w;
-
-    let r = svg.getBoundingClientRect();
-    let px = ((e.touches[0].clientX + e.touches[1].clientX)/2-r.left)/r.width;
-    let py = ((e.touches[0].clientY + e.touches[1].clientY)/2-r.top)/r.height;
-
-    let x = vb.x + px*vb.w - px*w;
-    let y = vb.y + py*vb.h - py*h;
+    let x = vb.x + vb.px/vb.rw*vb.w - vb.px/vb.rw*w;
+    let y = vb.y + vb.py/vb.rh*vb.h - vb.py/vb.rh*h;
 
     svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
 }, {passive:false});
