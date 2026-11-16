@@ -96,8 +96,8 @@ function openEditPopup(obj) {
     editingObject = obj;
 
     document.getElementById("edit-name").value = obj.text;
-    document.getElementById("edit-color").value = obj.color;
-
+    document.getElementById("edit-team").value =
+    obj.color === "#ff4d4d" ? "2" : "1";
     document.getElementById("edit-popup").style.display = "block";
 }
 
@@ -112,15 +112,16 @@ document.getElementById("edit-name").addEventListener("input", function() {
     group.querySelector("text").textContent = this.value;
 });
 
-// 色の即時反映
-document.getElementById("edit-color").addEventListener("input", function() {
-
+// チームの即時反映
+document.getElementById("edit-team").addEventListener("change", function() {
     if (!editingObject) return;
 
-    editingObject.color = this.value;
+    const color = this.value === "1" ? "#4da6ff" : "#ff4d4d";
+
+    editingObject.color = color;
 
     const group = document.getElementById("object_" + editingObject.id);
-    group.querySelector("polygon").setAttribute("fill", this.value);
+    group.querySelector("polygon").setAttribute("fill", color);
 });
 
 // 閉じる
