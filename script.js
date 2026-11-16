@@ -3,13 +3,13 @@ const svg = document.getElementById("drawing-area");
 const NS = "http://www.w3.org/2000/svg";
 
 // 方眼の描画
-for (let k = -1000; k <= 2000; k += 20) {
+for (let k = -2000; k <= 4000; k += 20) {
 
     const line1 = document.createElementNS(NS, "line");
     line1.setAttribute("x1", 0);
     line1.setAttribute("y1", k);
-    line1.setAttribute("x2", 1000);
-    line1.setAttribute("y2", k - 1000);
+    line1.setAttribute("x2", 2000);
+    line1.setAttribute("y2", k - 2000);
     line1.setAttribute("stroke", "#cccccc");
     line1.setAttribute("stroke-width", 1);
     svg.appendChild(line1);
@@ -17,8 +17,8 @@ for (let k = -1000; k <= 2000; k += 20) {
     const line2 = document.createElementNS(NS, "line");
     line2.setAttribute("x1", 0);
     line2.setAttribute("y1", -k);
-    line2.setAttribute("x2", 1000);
-    line2.setAttribute("y2", 1000 - k);
+    line2.setAttribute("x2", 2000);
+    line2.setAttribute("y2", 2000 - k);
     line2.setAttribute("stroke", "#cccccc");
     line2.setAttribute("stroke-width", 1);
     svg.appendChild(line2);
