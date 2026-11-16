@@ -184,3 +184,52 @@ createButton.addEventListener("click", function() {
 
     drawObject(obj);
 });
+
+// 全体画像生成
+const generateImageButton =
+    document.getElementById("generate-image");
+
+const imagePreview =
+    document.getElementById("image-preview");
+
+generateImageButton.addEventListener("click", function() {
+
+    // SVGを複製
+    const clone = svg.cloneNode(true);
+
+    // 画像サイズを指定
+    clone.setAttribute("width", 1000);
+    clone.setAttribute("height", 1000);
+
+    // SVGを文字列に変換
+    const serializer = new XMLSerializer();
+    const svgText = serializer.serializeToString(clone);
+
+    // SVGを画像データにする
+    const svgBlob = new Blob(
+        [svgText],
+        { type: "image/svg+xml" }
+    );
+
+    const url = URL.createObjectURL(svgBlob);
+
+    const img = new Image();
+
+    img.onload = function() {
+
+        // Canvasに描画
+        const canvas = document.createElement("canvas");
+        canvas.width = 1000;
+        canvas.height = 1000;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        // PNGに変換して表示
+        imagePreview.src = canvas.toDataURL("image/png");
+
+        URL.revokeObjectURL(url);
+    };
+
+    img.src = url;
+});
