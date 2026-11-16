@@ -490,3 +490,10 @@ document.getElementById("select-team-2").addEventListener("click", function() {
     currentTeam = 2;
     document.getElementById("team-popup").style.display = "none";
 });
+
+// 全オブジェクトを消去
+document.getElementById("clear-objects").addEventListener("click", function() {
+    objects = [];
+    objectsLayer.innerHTML = "";
+});
+
