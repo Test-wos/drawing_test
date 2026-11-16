@@ -230,7 +230,11 @@ svg.addEventListener("pointerup", function(event) {
     
     // タップなら編集画面を開く
     if (!current.moved) {
-        console.log("オブジェクトをタップ:", current.obj.id);
+        document.getElementById("edit-popup-text").textContent =
+            "オブジェクトID: " + current.obj.id;
+
+        document.getElementById("edit-popup").style.display = "block";
+
         drag = null;
         return;
     }
