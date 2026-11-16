@@ -216,7 +216,7 @@ svg.addEventListener("pointerup", function(event) {
     const dx = Math.abs(x - 500);
     const dy = Math.abs(y - 500);
 
-    if (dx + dy <= 140) {
+    if (dx + dy < 140) {
         // 重なっていたら元の位置へ戻す
         x = current.startX;
         y = current.startY;
