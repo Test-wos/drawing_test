@@ -29,7 +29,7 @@ const RedZone = document.createElementNS(NS, "polygon");
 
 RedZone.setAttribute(
     "points",
-    "500,300 700,500 500,700 300,500"
+    "500,220 780,500 500,780 220,500"
 );
 RedZone.setAttribute("fill", "#ff9999");
 RedZone.setAttribute("fill-opacity", "0.3");
