@@ -244,17 +244,29 @@ svg.addEventListener("touchstart", e => {
     if (e.touches.length == 2) {
         drag = null;
         pinch = getDistance(e.touches[0], e.touches[1]);
-        let v = svg.viewBox.baseVal;
-        vb = {x:v.x, y:v.y, w:v.width, h:v.height};
+        let v = svg.viewBox.baseVal, r = svg.getBoundingClientRect();
+        vb = {
+            x:v.x, y:v.y, w:v.width, h:v.height,
+            cx:(e.touches[0].clientX+e.touches[1].clientX)/2,
+            cy:(e.touches[0].clientY+e.touches[1].clientY)/2,
+            px:(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,
+            py:(e.touches[0].clientY+e.touches[1].clientY)/2-r.top,
+            rw:r.width, rh:r.height
+        };
     }
 }, {passive:false});
 
 svg.addEventListener("touchmove", e => {
     if (e.touches.length != 2 || !pinch) return;
     e.preventDefault();
+
     let s = pinch / getDistance(e.touches[0], e.touches[1]);
-    svg.setAttribute("viewBox",
-        `${vb.x} ${vb.y} ${vb.w*s} ${vb.h*s}`);
+    let w = Math.max(100, Math.min(1000, vb.w*s));
+    let h = w;
+    let x = vb.x + vb.px/vb.rw*vb.w - vb.px/vb.rw*w;
+    let y = vb.y + vb.py/vb.rh*vb.h - vb.py/vb.rh*h;
+
+    svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
 }, {passive:false});
 
 svg.addEventListener("touchend", e => {
