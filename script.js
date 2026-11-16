@@ -55,10 +55,10 @@ svg.appendChild(restricted);
 
  // 侵入不可エリアの角に置く4つの色付きエリア
 const cornerAreas = [
-    {x:500, y:360, name:"砲台:北", color:"#4da6ff"},
+    {x:500, y:400, name:"砲台:北", color:"#4da6ff"},
     {x:600, y:500, name:"砲台:東", color:"#4dff88"},
     {x:500, y:600, name:"砲台:南", color:"#ffcc66"},
-    {x:380, y:500, name:"砲台:西", color:"#cc99ff"}
+    {x:400, y:500, name:"砲台:西", color:"#cc99ff"}
 ];
 
 cornerAreas.forEach(area => {
