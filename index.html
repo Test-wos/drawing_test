@@ -19,5 +19,20 @@
         <img id="image-preview" alt="全体画像">
     </div>
     <script src="script.js"></script>
+    <div id="edit-popup" style="
+    display:none;
+    position:fixed;
+    top:20px;
+    left:20px;
+    background:white;
+    border:1px solid black;
+    padding:12px;
+    z-index:1000;
+">
+    <span id="edit-popup-text"></span>
+    <button onclick="document.getElementById('edit-popup').style.display='none'">
+        閉じる
+    </button>
+</div>
 </body>
 </html>
