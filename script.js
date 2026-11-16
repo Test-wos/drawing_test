@@ -174,7 +174,7 @@ document.getElementById("edit-name").addEventListener("input", function() {
     text.setAttribute("y", 0);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("dominant-baseline", "middle");
-    text.setAttribute("font-size", 6);
+    text.setAttribute("font-size", 8);
 
     const name = this.value;
 
@@ -252,7 +252,7 @@ text.setAttribute("x", 0);
 text.setAttribute("y", 0);
 text.setAttribute("text-anchor", "middle");
 text.setAttribute("dominant-baseline", "middle");
-text.setAttribute("font-size", 10);
+text.setAttribute("font-size", 8);
 
 const name = obj.text;
 
