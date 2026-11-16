@@ -22,17 +22,30 @@
     <div id="edit-popup" style="
     display:none;
     position:fixed;
-    top:20px;
-    left:20px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     background:white;
-    border:1px solid black;
-    padding:12px;
+    border:1px solid #777;
+    border-radius:10px;
+    padding:20px;
     z-index:1000;
+    width:240px;
+    box-shadow:0 2px 10px #888;
 ">
-    <span id="edit-popup-text"></span>
-    <button onclick="document.getElementById('edit-popup').style.display='none'">
-        閉じる
-    </button>
+    <h3>オブジェクト編集</h3>
+
+    <label>名前</label>
+    <input id="edit-name" type="text" style="width:100%;">
+
+    <br><br>
+
+    <label>色</label>
+    <input id="edit-color" type="color">
+
+    <br><br>
+
+    <button id="edit-close">閉じる</button>
 </div>
 </body>
 </html>
