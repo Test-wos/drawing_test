@@ -233,3 +233,33 @@ generateImageButton.addEventListener("click", function() {
 
     img.src = url;
 });
+
+let pinch = 0, vb;
+
+svg.addEventListener("touchstart", e => {
+    if (e.touches.length == 2) {
+        drag = null;
+        pinch = getDistance(...e.touches);
+        vb = {...svg.viewBox.baseVal};
+    }
+}, {passive:false});
+
+svg.addEventListener("touchmove", e => {
+    if (e.touches.length != 2 || !pinch) return;
+    e.preventDefault();
+
+    let s = pinch / getDistance(...e.touches);
+    svg.setAttribute("viewBox",
+        `${vb.x} ${vb.y} ${vb.width*s} ${vb.height*s}`);
+}, {passive:false});
+
+svg.addEventListener("touchend", e => {
+    if (e.touches.length < 2) pinch = 0;
+});
+
+function getDistance(t) {
+    return Math.hypot(
+        t[0].clientX-t[1].clientX,
+        t[0].clientY-t[1].clientY
+    );
+}
