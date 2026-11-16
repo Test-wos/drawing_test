@@ -254,6 +254,48 @@ createButton.addEventListener("click", function() {
     drawObject(obj);
 });
 
+// 侵入不可エリアを囲む一斉生成
+const ringButton = document.getElementById("create-ring");
+
+ringButton.addEventListener("click", function() {
+
+    const positions = new Map();
+
+    // 方眼座標で外周を作成
+    for (let t = -140; t <= 140; t += 40) {
+
+        const points = [
+            [140, t],
+            [-140, t],
+            [t, 140],
+            [t, -140]
+        ];
+
+        points.forEach(([u, v]) => {
+            positions.set(`${u},${v}`, [u, v]);
+        });
+    }
+
+    // オブジェクト生成
+    positions.forEach(([u, v]) => {
+
+        const obj = {
+            id: nextId,
+            type: "2x2",
+            x: 500 + (u + v) / 2,
+            y: 500 + (u - v) / 2,
+            text: String(nextId),
+            color: "#4da6ff"
+        };
+
+        objects.push(obj);
+        nextId++;
+
+        drawObject(obj);
+    });
+});
+
+
 // 全体画像生成
 const generateImageButton =
     document.getElementById("generate-image");
