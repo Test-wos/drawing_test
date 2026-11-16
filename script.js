@@ -48,6 +48,34 @@ const objects = [];
 let nextId = 1;
 let drag = null;
 
+// 配置可能か判定
+function canPlace(x, y, ignoreObj = null) {
+
+    const u = x + y;
+    const v = x - y;
+
+    // 侵入不可エリアとの重なり
+    if (Math.max(Math.abs(u - 1000), Math.abs(v)) < 140) {
+        return false;
+    }
+
+    // 他のオブジェクトとの重なり
+    for (const obj of objects) {
+        if (obj === ignoreObj) continue;
+
+        const ou = obj.x + obj.y;
+        const ov = obj.x - obj.y;
+
+        if (
+            Math.abs(u - ou) < 40 &&
+            Math.abs(v - ov) < 40
+        ) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 // SVG座標の取得
 function getSVGPoint(event) {
@@ -212,12 +240,7 @@ svg.addEventListener("pointerup", function(event) {
     x = (u + v) / 2;
     y = (u - v) / 2;
 
-    // 侵入不可エリアとの重なり判定
-    const dx = Math.abs(x - 500);
-    const dy = Math.abs(y - 500);
-
-    if (dx + dy < 140) {
-        // 重なっていたら元の位置へ戻す
+    if (!canPlace(x, y, current.obj)) {
         x = current.startX;
         y = current.startY;
     }
@@ -242,8 +265,8 @@ createButton.addEventListener("click", function() {
     const obj = {
         id: nextId,
         type: "2x2",
-        x: 150,
-        y: 150,
+        x: 500,
+        y: 500,
         text: "A",
         color: "#4da6ff"
     };
@@ -290,6 +313,8 @@ ringButton.addEventListener("click", function() {
 
         objects.push(obj);
         nextId++;
+        
+        if(!canPlace(x,y)) return;
 
         drawObject(obj);
     });
