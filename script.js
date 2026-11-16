@@ -52,6 +52,49 @@ restricted.setAttribute("stroke-width", "2");
 
 svg.appendChild(restricted);
 
+
+ // 侵入不可エリアの角に置く4つの色付きエリア
+const cornerAreas = [
+    {x:500, y:380, name:"砲台:北", color:"#4da6ff"},
+    {x:620, y:500, name:"砲台:東", color:"#4dff88"},
+    {x:500, y:620, name:"砲台:西", color:"#ffcc66"},
+    {x:380, y:500, name:"砲台:南", color:"#cc99ff"}
+];
+
+cornerAreas.forEach(area => {
+
+    const group = document.createElementNS(NS, "g");
+
+    group.setAttribute(
+        "transform",
+        `translate(${area.x},${area.y})`
+    );
+
+    // 2×2の菱形
+    const shape = document.createElementNS(NS, "polygon");
+    shape.setAttribute(
+        "points",
+        "0,-20 20,0 0,20 -20,0"
+    );
+    shape.setAttribute("fill", area.color);
+    shape.setAttribute("stroke", "#333");
+    group.appendChild(shape);
+
+    // 名前
+    const text = document.createElementNS(NS, "text");
+    text.setAttribute("x", 0);
+    text.setAttribute("y", 0);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("dominant-baseline", "middle");
+    text.setAttribute("font-size", 10);
+    text.textContent = area.name;
+    group.appendChild(text);
+
+    svg.appendChild(group);
+});
+
+
+
 // オブジェクト専用レイヤー
 const objectsLayer = document.createElementNS(NS, "g");
 svg.appendChild(objectsLayer);
