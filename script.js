@@ -236,30 +236,27 @@ generateImageButton.addEventListener("click", function() {
 
 let pinch = 0, vb;
 
+function getDistance(a, b) {
+    return Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY);
+}
+
 svg.addEventListener("touchstart", e => {
     if (e.touches.length == 2) {
         drag = null;
-        pinch = getDistance(...e.touches);
-        vb = {...svg.viewBox.baseVal};
+        pinch = getDistance(e.touches[0], e.touches[1]);
+        let v = svg.viewBox.baseVal;
+        vb = {x:v.x, y:v.y, w:v.width, h:v.height};
     }
 }, {passive:false});
 
 svg.addEventListener("touchmove", e => {
     if (e.touches.length != 2 || !pinch) return;
     e.preventDefault();
-
-    let s = pinch / getDistance(...e.touches);
+    let s = pinch / getDistance(e.touches[0], e.touches[1]);
     svg.setAttribute("viewBox",
-        `${vb.x} ${vb.y} ${vb.width*s} ${vb.height*s}`);
+        `${vb.x} ${vb.y} ${vb.w*s} ${vb.h*s}`);
 }, {passive:false});
 
 svg.addEventListener("touchend", e => {
     if (e.touches.length < 2) pinch = 0;
 });
-
-function getDistance(t) {
-    return Math.hypot(
-        t[0].clientX-t[1].clientX,
-        t[0].clientY-t[1].clientY
-    );
-}
