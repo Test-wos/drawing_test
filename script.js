@@ -149,7 +149,7 @@ function getSVGPoint(event) {
 //SVG座標→AIM座標
 function svgToAim(x,y){
     const dx=x-500;
-    const dy=y-500;
+    const dy=y-360;
     
     return {
         x:606+(dx-dy)/20,
@@ -663,7 +663,8 @@ const teamObjects = objects
 
 
         for (const obj of teamObjects) {
-            result += `${obj.text}: ${(svgToAim(obj.x,obj.y)}\n`;
+            const aim =svgToAim(obj.x,obj.y);
+            result += `${obj.text}: (${aim.x},${aim.y})\n`;
         }
 
         result += "\n";
