@@ -146,6 +146,17 @@ function getSVGPoint(event) {
     );
 }
 
+//SVG座標→AIM座標
+function svgToAim(x,y){
+    const dx=x-500;
+    const dy=y-500;
+    
+    return {
+        x:606+(dx-dy)/20,
+        y:606+(dx+dy)/20
+    };
+}
+
 // 編集画面を開く
 function openEditPopup(obj) {
 
@@ -652,7 +663,7 @@ const teamObjects = objects
 
 
         for (const obj of teamObjects) {
-            result += `${obj.text}: (${obj.x}, ${obj.y})\n`;
+            result += `${obj.text}: ${(svgToAim(obj.x,obj.y)}\n`;
         }
 
         result += "\n";
