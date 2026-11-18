@@ -223,6 +223,32 @@ document.getElementById("edit-team").addEventListener("change", function() {
     group.querySelector("polygon").setAttribute("fill", color);
 });
 
+// オブジェクト削除
+document.getElementById("edit-delete").addEventListener("click", function() {
+
+    if (!editingObject) return;
+
+    // 配列から削除
+    const index = objects.indexOf(editingObject);
+
+    if (index !== -1) {
+        objects.splice(index, 1);
+    }
+
+    // SVGから削除
+    const group = document.getElementById(
+        "object_" + editingObject.id
+    );
+
+    if (group) {
+        group.remove();
+    }
+
+    // 編集画面を閉じる
+    document.getElementById("edit-popup").style.display = "none";
+    editingObject = null;
+});
+
 // 閉じる
 document.getElementById("edit-close").addEventListener("click", function() {
 
