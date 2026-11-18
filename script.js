@@ -621,15 +621,9 @@ svg.addEventListener("touchend", e => {
     }
 });
 
-// チーム設定ボタンを押すとプルダウンを表示
-document.getElementById("team-settings").addEventListener("click", function() {
-    document.getElementById("team-select").style.display = "inline-block";
-});
-
-// プルダウンでチームを選択
-document.getElementById("team-select").addEventListener("change", function() {
+// チーム選択の即時反映
+document.getElementById("team-settings").addEventListener("change", function() {
     currentTeam = Number(this.value);
-    this.style.display = "none";
 });
 
 // 全オブジェクトを消去
