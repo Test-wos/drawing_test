@@ -1,4 +1,5 @@
-body{
+
+body {
     font-family: "Noto Sans JP", "Hiragino Sans", "Meiryo", sans-serif;
 }
 
@@ -10,16 +11,100 @@ body{
     touch-action: none;
 }
 
-#image-preview {
-    max-width: 20%;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-}
-
 button {
     width: 150px;
     font-size: 18px;
     padding: 10px 20px;
-    
+}
+
+/* 3つの表示欄 */
+#display-panels {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+/* 各表示欄 */
+.panel {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 300px;
+    padding: 12px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+}
+
+.panel h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+/* 編集欄 */
+#edit-popup {
+    display: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+#edit-name {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+}
+
+/* 画像欄 */
+.panel-content {
+    width: 100%;
+    overflow: auto;
+}
+
+#image-preview {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+
+/* 座標欄 */
+#coordinate-output {
+    display: none;
+    margin-top: 10px;
+}
+
+#coordinate-text {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    resize: vertical;
+}
+
+/* スマホでも3列を維持 */
+@media (max-width: 600px) {
+    #display-panels {
+        gap: 5px;
+    }
+
+    .panel {
+        padding: 5px;
+        min-height: 250px;
+    }
+
+    .panel h3 {
+        font-size: 13px;
+    }
+
+    .panel button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6px 2px;
+        font-size: 11px;
+    }
 }
