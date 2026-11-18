@@ -37,53 +37,63 @@
     
     <br><br>
         
+    <div id="display-panels">
 
-    <button id="generate-image">全体画像を生成</button>
+    <!-- オブジェクト編集欄 -->
+    <section class="panel">
+        <h3>オブジェクト編集</h3>
 
-    <div>
-        <img id="image-preview" alt="全体画像">
-    </div>
+        <div id="edit-popup">
+            <p>編集するオブジェクトを選択してください。</p>
 
-<br><br>
-    
-<button id="export-coordinates">座標一覧</button>
+            <label>名前</label>
+            <input id="edit-name" type="text">
 
-<div id="coordinate-output" style="display:none;">
-    <textarea id="coordinate-text" rows="12" readonly></textarea>
-    <button id="copy-coordinates">コピー</button>
-    <button id="close-coordinates">閉じる</button>
-</div>
+            <br><br>
 
+            <label>チーム</label>
+            <select id="edit-team">
+                <option value="1">チームA（青）</option>
+                <option value="2">チームB（緑）</option>
+            </select>
 
-    <div id="edit-popup" style="
-    display:none;
-    background:white;
-    border:1px solid #777;
-    border-radius:10px;
-    padding:20px;
-    margin:15px;
-    width:240px;
-">
-    <h3>オブジェクト編集</h3>
+            <br><br>
 
-    <label>名前</label>
-    <input id="edit-name" type="text" style="width:100%; font-size:16px;">
+            <button id="edit-delete" style="color:red;">
+                オブジェクト削除
+            </button>
 
-    <br><br>
+            <br><br>
 
-    <label>チーム</label>
-<select id="edit-team" style="font-size:16px;">
-    <option value="1">チームA（青）</option>
-    <option value="2">チームB（緑）</option>
-</select>
+            <button id="edit-close">閉じる</button>
+        </div>
+    </section>
 
-    <br><br>
-        
-    <button id="edit-delete" style="color:red;">オブジェクト削除</button>
-    
-    <br><br>
+    <!-- 画像生成欄 -->
+    <section class="panel">
+        <h3>画像生成</h3>
 
-    <button id="edit-close">閉じる</button>
+        <button id="generate-image">全体画像を生成</button>
+
+        <div class="panel-content">
+            <img id="image-preview" alt="全体画像">
+        </div>
+    </section>
+
+    <!-- 座標一覧欄 -->
+    <section class="panel">
+        <h3>座標一覧</h3>
+
+        <button id="export-coordinates">座標一覧を生成</button>
+
+        <div id="coordinate-output">
+            <textarea id="coordinate-text" rows="12" readonly></textarea>
+
+            <button id="copy-coordinates">コピー</button>
+            <button id="close-coordinates">閉じる</button>
+        </div>
+    </section>
+
 </div>
 <script src="script.js"></script>
 </body>
