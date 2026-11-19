@@ -1,5 +1,18 @@
 /*コメントアウト*/
 
+:root{
+    --color-main-back:orange;
+    --color-main-text:black;
+    --color-header-back:blue;
+    --color-header-text:red;
+    --color-title-back:grey;
+    --color-title-text:yellow;
+    
+    --font-main:sans-serif;
+    --font-header:sans-serif;
+    --font-title:sans-serif;
+}
+
 @page{
     size:A4 portrait;
     margin:0;
@@ -9,9 +22,9 @@
 }
 body{
     margin: 0;
-    background: #ddd;
-    font-family: sans-serif;
-    color: #222;
+    background-color:var(--color-main-back);
+    font:var(--font-main);
+    color:var(--color-main-text);
 }
 .pages{
     width: 210mm;
@@ -21,9 +34,16 @@ body{
     background: white;
     overflow: hidden;
 }
-h2{
-    font-size: 16pt;
+header{
+    background-color:var(--color-header-back);
+    color:var(--color-header-text);
+    font:var(--font-header);
 }
+title{
+    background-color:var(--color-title-back);
+    color:var(--color-title-text);
+    font:var(--font-title);
+
 
 @media print{
     body{
