@@ -1,1 +1,39 @@
 /*コメントアウト*/
+
+@page{
+    size:A4 portrait;
+    margin:0;
+}
+*{
+    box-sizing:border-box;
+}
+body{
+    margin: 0;
+    background: #ddd;
+    font-family: sans-serif;
+    color: #222;
+}
+.p1{
+    width: 210mm;
+    height: 297mm;
+    padding: 15mm;
+    margin: 10mm auto;
+    background: white;
+    overflow: hidden;
+}
+h2{
+    font-size: 16pt;
+}
+
+@media print {
+    body {
+        background: white;
+    }
+    .page {
+        margin: 0;
+        break-after: page;
+    }
+    .page:last-child {
+        break-after: auto;
+    }
+}
