@@ -1,13 +1,9 @@
 /*コメントアウト*/
 
 :root{
-    --color-main-back:orange;
+    --color-main-back:grey;
     --color-main-text:black;
-    --color-header-back:blue;
-    --color-header-text:red;
-    --color-title-back:grey;
-    --color-title-text:yellow;
-    
+
     --font-main:sans-serif;
     --font-header:sans-serif;
     --font-title:sans-serif;
@@ -35,13 +31,11 @@ body{
     overflow: hidden;
 }
 header{
-    background-color:var(--color-header-back);
-    color:var(--color-header-text);
+    background-color:grey;
     font:var(--font-header);
 }
 title{
-    background-color:var(--color-title-back);
-    color:var(--color-title-text);
+    background-color:grey;
     font:var(--font-title);
 
 
