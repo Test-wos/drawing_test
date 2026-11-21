@@ -153,7 +153,7 @@ function svgToAim(x,y){
     
     return {
         x:606+(dx-dy)/20,
-        y:606+(dx+dy)/20
+        y:606-(dx+dy)/20
     };
 }
 
